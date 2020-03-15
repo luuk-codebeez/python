@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- azure-pipelines
 
 resources:
 - repo: self
@@ -23,6 +23,8 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
+        containerRegistry: 'vscode-dockerregistry'
+        repository: 'python'
         command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/3.7/Dockerfile'
         tags: |
